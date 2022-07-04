@@ -34,5 +34,10 @@ export const useAuth = () => {
     },
     [navigate, showMessage, setLoginUser]
   );
-  return { login, loading };
+  const logout = useCallback(() => {
+    setLoginUser(null);
+    showMessage({ title: "ログアウトしました", status: "success" });
+    navigate("/");
+  }, [setLoginUser, showMessage, navigate]);
+  return { login, loading, logout };
 };

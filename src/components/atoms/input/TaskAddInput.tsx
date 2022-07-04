@@ -1,12 +1,5 @@
 import { Input } from "@chakra-ui/react";
-import React, {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  FormEvent,
-  SetStateAction,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Task } from "../../../types/task";
@@ -14,11 +7,12 @@ import { Task } from "../../../types/task";
 type Props = {
   taskList: Array<Task>;
   setTaskList: Dispatch<SetStateAction<Array<Task>>>;
+  cardId: string;
 };
 
 export const TaskAddInput: FC<Props> = (props) => {
   const [inputText, setInputText] = useState("");
-  const { taskList, setTaskList } = props;
+  const { taskList, setTaskList, cardId } = props;
 
   const onSubmitTaskAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +21,13 @@ export const TaskAddInput: FC<Props> = (props) => {
       const taskId = uuidv4();
       setTaskList([
         ...taskList,
-        { id: taskId, text: inputText, draggableId: `task-${taskId}` },
+        {
+          cardId: cardId,
+          id: taskId,
+          title: inputText,
+          completed: false,
+          draggableId: `item-${taskId}`,
+        },
       ]);
     }
     setInputText("");

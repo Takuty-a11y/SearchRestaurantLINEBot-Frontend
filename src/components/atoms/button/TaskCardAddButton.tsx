@@ -1,22 +1,22 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import { FC } from "react";
+import { MdAdd } from "react-icons/md";
 import { Box, Button, Icon } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 
-import { TaskList } from "../../../types/taskList";
-import { MdAdd } from "react-icons/md";
+import { useTaskList } from "../../../hooks/useTaskList";
 
-type Props = {
-  taskCardList: Array<TaskList>;
-  setTaskCardList: Dispatch<SetStateAction<Array<TaskList>>>;
-};
-
-export const TaskCardAddButton: FC<Props> = (props) => {
-  const { taskCardList, setTaskCardList } = props;
+export const TaskCardAddButton: FC = () => {
+  const { taskCardList, setTaskCardList } = useTaskList();
   const onClickAddCard = () => {
     const CardId = uuidv4();
     setTaskCardList([
       ...taskCardList,
-      { id: CardId, draggableId: `item-${CardId}` },
+      {
+        id: CardId,
+        title: "Today",
+        completed: false,
+        draggableId: `card-${CardId}`,
+      },
     ]);
   };
   return (

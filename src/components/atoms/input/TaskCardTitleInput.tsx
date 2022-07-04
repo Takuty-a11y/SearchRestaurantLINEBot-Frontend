@@ -8,11 +8,14 @@ import {
 } from "react";
 import { Box, Heading, Input } from "@chakra-ui/react";
 
-type Props = {};
+type Props = {
+  title: string;
+};
 
 export const TaskCardTitleInput: FC<Props> = (props) => {
+  const { title } = props;
   const [isClick, setisClick] = useState(false);
-  const [cardTitle, setCardTitle] = useState("Today");
+  const [cardTitle, setCardTitle] = useState(title);
 
   const onClickTitle = useCallback(() => {
     setisClick(true);
@@ -46,11 +49,10 @@ export const TaskCardTitleInput: FC<Props> = (props) => {
             onFocus={onFocusTitle}
             onBlur={onBlurTitle}
             value={cardTitle}
-            maxLength={10}
           />
         </form>
       ) : (
-        <Heading as="h3" fontSize="1.4rem">
+        <Heading as="h3" fontSize="1.4rem" maxW="100%">
           {cardTitle === "" ? "タイトルなし" : cardTitle}
         </Heading>
       )}

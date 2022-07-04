@@ -14,7 +14,7 @@ export const UserCard: FC<Props> = (props) => {
     <Box
       w="260px"
       h="260px"
-      bg="white"
+      bg="gray.100"
       borderRadius="10px"
       shadow="md"
       p={4}

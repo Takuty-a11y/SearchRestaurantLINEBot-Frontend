@@ -35,7 +35,7 @@ export const TaskItem = (props: Props) => {
             bg="white"
             shadow="md"
           >
-            <Text maxW="80%">{trgTask.text}</Text>
+            <Text maxW="80%">{trgTask.title}</Text>
             <IconButton
               aria-label="タスク削除ボタン"
               icon={<MdDelete />}

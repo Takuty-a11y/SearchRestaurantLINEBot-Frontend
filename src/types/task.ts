@@ -1,5 +1,7 @@
 export type Task = {
+  cardId: string;
   id: string;
-  text: string;
+  title: string;
+  completed: boolean;
   draggableId: string;
 };

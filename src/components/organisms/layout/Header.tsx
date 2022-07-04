@@ -4,6 +4,7 @@ import { Box, Flex, Heading, Link, useDisclosure } from "@chakra-ui/react";
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 type Props = {
   children: ReactNode;
@@ -13,6 +14,7 @@ export const Header: FC<Props> = memo((props) => {
   const { children } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const onClickHome = useCallback(() => {
     navigate("/home");
@@ -26,7 +28,9 @@ export const Header: FC<Props> = memo((props) => {
     navigate("/home/setting");
     onClose();
   }, [navigate, onClose]);
-
+  const onClickLogout = useCallback(()=>{
+    logout();
+  },[logout])
   return (
     <>
       <Flex
@@ -57,7 +61,10 @@ export const Header: FC<Props> = memo((props) => {
           <Box pr={4}>
             <Link onClick={onClickUserManagemaent}>ユーザー一覧</Link>
           </Box>
-          <Link onClick={onClickSetting}>設定</Link>
+          <Box pr={4}>
+            <Link onClick={onClickSetting}>設定</Link>
+          </Box>
+          <Link onClick={onClickLogout}>ログアウト</Link>
         </Flex>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
