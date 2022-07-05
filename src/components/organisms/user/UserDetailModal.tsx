@@ -1,3 +1,4 @@
+import { ChangeEvent, FC, memo, useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -11,9 +12,9 @@ import {
   ModalOverlay,
   Stack,
 } from "@chakra-ui/react";
-import React, { ChangeEvent, FC, memo, useEffect, useState } from "react";
 import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
+import { useMessage } from "../../../hooks/useMessage";
 
 type Props = {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export const UserDetailModal: FC<Props> = memo((props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const { showMessage } = useMessage();
   useEffect(() => {
     setUserName(user?.username ?? "");
     setName(user?.name ?? "");
@@ -47,10 +49,11 @@ export const UserDetailModal: FC<Props> = memo((props) => {
   const onChangePhone = (e: ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
   };
-
   const onClickUpdate = () => {
-    alert();
+    showMessage({ title: "更新しました", status: "success" });
+    onClose();
   };
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -98,7 +101,7 @@ export const UserDetailModal: FC<Props> = memo((props) => {
               </FormControl>
             </Stack>
           </ModalBody>
-          {isAdmin ?? (
+          {isAdmin && (
             <ModalFooter>
               <PrimaryButton onClick={onClickUpdate}>更新</PrimaryButton>
             </ModalFooter>
