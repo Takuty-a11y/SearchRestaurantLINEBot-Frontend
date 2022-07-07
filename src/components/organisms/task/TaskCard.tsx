@@ -17,7 +17,7 @@ type Props = {
 
 export const TaskCard: FC<Props> = memo((props) => {
   const { index, taskCard } = props;
-  const { taskList } = useTask();
+  const { taskList, setTaskList } = useTask();
   const [tasks, setTasks] = useState<Array<Task>>(
     taskList.filter((t) => t.cardId === taskCard.id)
   );
@@ -38,11 +38,20 @@ export const TaskCard: FC<Props> = memo((props) => {
             {...provided.draggableProps}
           >
             <Flex justifyContent="space-between" {...provided.dragHandleProps}>
-              <TaskCardTitleInput title={taskCard.title} />
+              <TaskCardTitleInput taskCard={taskCard} />
               <TaskCardDeleteButton taskCard={taskCard} />
             </Flex>
-            <TaskAddInput taskList={tasks} setTaskList={setTasks} cardId={taskCard.id} />
-            <Tasks taskList={tasks} setTaskList={setTasks} />
+            <TaskAddInput
+              taskList={tasks}
+              setTaskList={setTasks}
+              taskList2={taskList}
+              setTaskList2={setTaskList}
+              cardId={taskCard.id}
+            />
+            <Tasks
+              taskList={tasks}
+              setTaskList={setTasks}
+            />
           </Box>
         )}
       </Draggable>

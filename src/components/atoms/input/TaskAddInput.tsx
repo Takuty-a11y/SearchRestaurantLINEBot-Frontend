@@ -7,12 +7,14 @@ import { Task } from "../../../types/task";
 type Props = {
   taskList: Array<Task>;
   setTaskList: Dispatch<SetStateAction<Array<Task>>>;
+  taskList2: Array<Task>;
+  setTaskList2: Dispatch<SetStateAction<Array<Task>>>;
   cardId: string;
 };
 
 export const TaskAddInput: FC<Props> = (props) => {
   const [inputText, setInputText] = useState("");
-  const { taskList, setTaskList, cardId } = props;
+  const { taskList, setTaskList, taskList2, setTaskList2, cardId } = props;
 
   const onSubmitTaskAdd = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +23,16 @@ export const TaskAddInput: FC<Props> = (props) => {
       const taskId = uuidv4();
       setTaskList([
         ...taskList,
+        {
+          cardId: cardId,
+          id: taskId,
+          title: inputText,
+          completed: false,
+          draggableId: `item-${taskId}`,
+        },
+      ]);
+      setTaskList2([
+        ...taskList2,
         {
           cardId: cardId,
           id: taskId,

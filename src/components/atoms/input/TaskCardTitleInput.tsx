@@ -7,15 +7,18 @@ import {
   useState,
 } from "react";
 import { Box, Heading, Input } from "@chakra-ui/react";
+import { TaskList } from "../../../types/taskList";
+import { useTaskList } from "../../../hooks/useTaskList";
 
 type Props = {
-  title: string;
+  taskCard: TaskList;
 };
 
 export const TaskCardTitleInput: FC<Props> = (props) => {
-  const { title } = props;
+  const { taskCard } = props;
   const [isClick, setisClick] = useState(false);
-  const [cardTitle, setCardTitle] = useState(title);
+  const [cardTitle, setCardTitle] = useState(taskCard.title);
+  const { taskCardList, setTaskCardList } = useTaskList();
 
   const onClickTitle = useCallback(() => {
     setisClick(true);
@@ -31,6 +34,18 @@ export const TaskCardTitleInput: FC<Props> = (props) => {
   };
   const onSubmitTitle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTaskCardList((prevState) =>
+      prevState.map((obj) =>
+        obj.id === taskCard.id
+          ? {
+              id: obj.id,
+              title: cardTitle,
+              draggableId: obj.draggableId,
+              completed: obj.completed,
+            }
+          : obj
+      )
+    );
     setisClick(false);
   };
 

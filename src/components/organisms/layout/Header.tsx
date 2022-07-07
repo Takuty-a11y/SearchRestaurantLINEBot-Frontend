@@ -4,6 +4,8 @@ import { Box, Flex, Heading } from "@chakra-ui/react";
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PrimarySearchInput } from "../../atoms/input/PrimarySearchInput";
+import { useSearchTask } from "../../../hooks/useSearchTask";
+import { useSearchUser } from "../../../hooks/useSearchUser";
 
 type Props = {
   children: ReactNode;
@@ -11,22 +13,41 @@ type Props = {
 
 export const Header: FC<Props> = memo((props) => {
   const { children } = props;
-  const navigate = useNavigate();
   const [page, setPage] = useState("");
+  const navigate = useNavigate();
   const location = useLocation();
+
+  const { searchTaskText, setSearchTaskText } = useSearchTask();
+  const { searchUserText, setSearchUserText } = useSearchUser();
 
   const onClickHome = useCallback(() => {
     navigate("/home");
   }, [navigate]);
-  const VisibleSearchInput = (path: string) => {
-    if (path === "/home") {
-      return <PrimarySearchInput placeholder="タスク名検索" />;
-    } else if (path === "/home/user_management") {
-      return <PrimarySearchInput placeholder="ユーザーID検索" />;
-    } else {
-      return;
-    }
-  };
+
+  const VisibleSearchInput = useCallback(
+    (path: string) => {
+      if (path === "/home") {
+        return (
+          <PrimarySearchInput
+            placeholder="タスク名検索"
+            textValue={searchTaskText}
+            setTextValue={setSearchTaskText}
+          />
+        );
+      } else if (path === "/home/user_management") {
+        return (
+          <PrimarySearchInput
+            placeholder="ユーザーID検索"
+            textValue={searchUserText}
+            setTextValue={setSearchUserText}
+          />
+        );
+      } else {
+        return;
+      }
+    },
+    [searchTaskText, setSearchTaskText, searchUserText, setSearchUserText]
+  );
 
   useEffect(() => {
     setPage(location.pathname);

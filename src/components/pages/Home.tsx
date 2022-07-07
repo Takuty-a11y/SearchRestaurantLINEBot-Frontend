@@ -7,11 +7,13 @@ import { TaskCard } from "../organisms/task/TaskCard";
 import { useTaskList } from "../../hooks/useTaskList";
 import { useUserTask } from "../../hooks/useUserTask";
 import { useLoginUser } from "../../hooks/useLoginUser";
+import { useSearchTask } from "../../hooks/useSearchTask";
 
 export const Home: FC = memo(() => {
   const { taskCardList, setTaskCardList } = useTaskList();
   const { getUserTask, loading } = useUserTask();
   const { loginUser } = useLoginUser();
+  const { searchTaskText } = useSearchTask();
 
   useEffect(() => {
     if (loginUser === null) return;
@@ -49,11 +51,15 @@ export const Home: FC = memo(() => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                {taskCardList.map((taskCard, index) => (
-                  <WrapItem key={taskCard.id}>
-                    <TaskCard index={index} taskCard={taskCard} />
-                  </WrapItem>
-                ))}
+                {taskCardList
+                  .filter((card) =>
+                    card.title.toUpperCase().match(searchTaskText.toUpperCase())
+                  )
+                  .map((taskCard, index) => (
+                    <WrapItem key={taskCard.id}>
+                      <TaskCard index={index} taskCard={taskCard} />
+                    </WrapItem>
+                  ))}
                 {provided.placeholder}
                 <WrapItem>
                   <TaskCardAddButton />

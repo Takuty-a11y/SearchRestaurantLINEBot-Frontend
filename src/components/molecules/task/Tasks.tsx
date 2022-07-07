@@ -35,8 +35,8 @@ export const Tasks: FC<Props> = (props) => {
                   <TaskItem
                     index={index}
                     trgTask={trgTask}
-                    taskList={taskList}
-                    setTaskList={setTaskList}
+                    taskList2={taskList}
+                    setTaskList2={setTaskList}
                   />
                 </div>
               ))}

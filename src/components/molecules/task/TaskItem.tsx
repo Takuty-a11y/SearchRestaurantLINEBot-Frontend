@@ -2,18 +2,21 @@ import { Flex, IconButton, Text } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { MdDelete } from "react-icons/md";
+import { useTask } from "../../../hooks/useTask";
 import { Task } from "../../../types/task";
 
 type Props = {
   index: number;
   trgTask: Task;
-  taskList: Array<Task>;
-  setTaskList: Dispatch<SetStateAction<Array<Task>>>;
+  taskList2: Array<Task>;
+  setTaskList2: Dispatch<SetStateAction<Array<Task>>>;
 };
 
 export const TaskItem = (props: Props) => {
-  const { index, trgTask, taskList, setTaskList } = props;
+  const { index, trgTask, taskList2, setTaskList2 } = props;
+  const { taskList, setTaskList } = useTask();
   const onClickDelete = (id: string) => {
+    setTaskList2(taskList2.filter((trgTask) => trgTask.id !== id));
     setTaskList(taskList.filter((trgTask) => trgTask.id !== id));
   };
 
