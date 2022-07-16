@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   Dispatch,
   ReactNode,
@@ -24,6 +24,7 @@ export const SearchUserContext = createContext<SearchUserContextType>(
 type Props = {
   children: ReactNode;
 };
+
 export const SearchTextProvider = (props: Props) => {
   const { children } = props;
   const [searchTaskText, setSearchTaskText] = useState("");

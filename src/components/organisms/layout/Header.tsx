@@ -1,8 +1,8 @@
 import { FC, memo, ReactNode, useCallback, useEffect, useState } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
-import { useLocation, useNavigate } from "react-router-dom";
 import { PrimarySearchInput } from "../../atoms/input/PrimarySearchInput";
 import { useSearchTask } from "../../../hooks/useSearchTask";
 import { useSearchUser } from "../../../hooks/useSearchUser";
@@ -37,7 +37,7 @@ export const Header: FC<Props> = memo((props) => {
       } else if (path === "/home/user_management") {
         return (
           <PrimarySearchInput
-            placeholder="ユーザーID検索"
+            placeholder="ユーザー名検索"
             textValue={searchUserText}
             setTextValue={setSearchUserText}
           />

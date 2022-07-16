@@ -12,8 +12,9 @@ import {
   ModalOverlay,
   Stack,
 } from "@chakra-ui/react";
-import { User } from "../../../types/api/user";
+
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
+import { User } from "../../../types/api/user";
 import { useMessage } from "../../../hooks/useMessage";
 
 type Props = {
@@ -53,7 +54,7 @@ export const UserDetailModal: FC<Props> = memo((props) => {
     showMessage({ title: "更新しました", status: "success" });
     onClose();
   };
-  
+
   return (
     <Modal
       isOpen={isOpen}

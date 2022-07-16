@@ -1,3 +1,4 @@
+import { FC, memo, useCallback, useEffect } from "react";
 import {
   Center,
   Spinner,
@@ -5,13 +6,13 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { FC, memo, useCallback, useEffect } from "react";
+
+import { UserCard } from "../organisms/user/UserCard";
+import { UserDetailModal } from "../organisms/user/UserDetailModal";
 import { useAllUsers } from "../../hooks/useAllUsers";
 import { useLoginUser } from "../../hooks/useLoginUser";
 import { useSearchUser } from "../../hooks/useSearchUser";
 import { useSelectUser } from "../../hooks/useSelectUser";
-import { UserCard } from "../organisms/user/UserCard";
-import { UserDetailModal } from "../organisms/user/UserDetailModal";
 
 export const UserManagement: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();

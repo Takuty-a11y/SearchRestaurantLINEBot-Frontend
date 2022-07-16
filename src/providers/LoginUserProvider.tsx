@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { User } from "../types/api/user";
 
 type LoginUser = User & { isAdmin: boolean };
@@ -24,6 +25,7 @@ type Props = {
   children: ReactNode;
 };
 
+//ログイン情報をローカルストレージから取得
 const getDefaultAuthInfo = (): LoginUser | null => {
   const defaultAuthInfo = window.localStorage.getItem("authInfo");
   if (defaultAuthInfo) {
@@ -32,6 +34,7 @@ const getDefaultAuthInfo = (): LoginUser | null => {
     return null;
   }
 };
+//ログイン情報をローカルストレージに保存
 const setAutoInfoToLocalStorage = (authInfo: LoginUser | null): void => {
   const authInfoStringfy = JSON.stringify(authInfo);
   window.localStorage.setItem("authInfo", authInfoStringfy);

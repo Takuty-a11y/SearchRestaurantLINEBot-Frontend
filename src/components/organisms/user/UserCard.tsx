@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Box, Image, Stack, Text } from "@chakra-ui/react";
+
 import { User } from "../../../types/api/user";
 
 type Props = {

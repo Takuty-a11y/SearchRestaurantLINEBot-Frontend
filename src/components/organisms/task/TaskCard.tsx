@@ -2,11 +2,11 @@ import { FC, memo, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Draggable } from "react-beautiful-dnd";
 
-import { Task } from "../../../types/task";
 import { TaskCardDeleteButton } from "../../atoms/button/TaskCardDeleteButton";
 import { TaskAddInput } from "../../atoms/input/TaskAddInput";
 import { TaskCardTitleInput } from "../../atoms/input/TaskCardTitleInput";
 import { Tasks } from "../../molecules/task/Tasks";
+import { Task } from "../../../types/task";
 import { TaskList } from "../../../types/taskList";
 import { useTask } from "../../../hooks/useTask";
 
@@ -17,9 +17,9 @@ type Props = {
 
 export const TaskCard: FC<Props> = memo((props) => {
   const { index, taskCard } = props;
-  const { taskList, setTaskList } = useTask();
+  const { globalTaskList, setGlobalTaskList } = useTask();
   const [tasks, setTasks] = useState<Array<Task>>(
-    taskList.filter((t) => t.cardId === taskCard.id)
+    globalTaskList.filter((t) => t.cardId === taskCard.id)
   );
 
   return (
@@ -44,14 +44,11 @@ export const TaskCard: FC<Props> = memo((props) => {
             <TaskAddInput
               taskList={tasks}
               setTaskList={setTasks}
-              taskList2={taskList}
-              setTaskList2={setTaskList}
+              globalTaskList={globalTaskList}
+              setGlobalTaskList={setGlobalTaskList}
               cardId={taskCard.id}
             />
-            <Tasks
-              taskList={tasks}
-              setTaskList={setTasks}
-            />
+            <Tasks taskList={tasks} setTaskList={setTasks} />
           </Box>
         )}
       </Draggable>

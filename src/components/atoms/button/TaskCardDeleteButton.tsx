@@ -1,6 +1,7 @@
-import { IconButton } from "@chakra-ui/react";
 import { FC, useCallback } from "react";
+import { IconButton } from "@chakra-ui/react";
 import { MdClose } from "react-icons/md";
+
 import { useTaskList } from "../../../hooks/useTaskList";
 import { TaskList } from "../../../types/taskList";
 
@@ -10,12 +11,12 @@ type Props = {
 
 export const TaskCardDeleteButton: FC<Props> = (props) => {
   const { taskCard } = props;
-  const { taskCardList, setTaskCardList } = useTaskList();
+  const { globalTaskCardList, setGlobalTaskCardList } = useTaskList();
   const onClickCardDelete = useCallback(
     (id: string) => {
-      setTaskCardList(taskCardList.filter((trg) => trg.id !== id));
+      setGlobalTaskCardList(globalTaskCardList.filter((trg) => trg.id !== id));
     },
-    [taskCardList, setTaskCardList]
+    [globalTaskCardList, setGlobalTaskCardList]
   );
 
   return (

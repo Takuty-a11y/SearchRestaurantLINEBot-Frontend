@@ -3,19 +3,19 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 import { Todo } from "../types/api/todo";
+import { Task } from "../types/task";
 import { useTaskList } from "./useTaskList";
 import { useTask } from "./useTask";
-import { Task } from "../types/task";
 
 export const useUserTask = () => {
   const [loading, setLoading] = useState(false);
-  const { setTaskCardList } = useTaskList();
-  const { setTaskList } = useTask();
+  const { setGlobalTaskCardList } = useTaskList();
+  const { setGlobalTaskList } = useTask();
   const getUserTask = useCallback(
     (id: number) => {
       setLoading(true);
-      //仮に自作する
-      setTaskCardList([
+      //DBがないので4つ自作
+      setGlobalTaskCardList([
         {
           id: "0",
           title: "Today0",
@@ -56,10 +56,10 @@ export const useUserTask = () => {
               draggableId: `item-${uuidv4()}`,
             })
           );
-          setTaskList(arr);
+          setGlobalTaskList(arr);
         })
         .catch(() => {
-          setTaskList([
+          setGlobalTaskList([
             {
               cardId: "1",
               id: "",
@@ -73,7 +73,7 @@ export const useUserTask = () => {
           setLoading(false);
         });
     },
-    [setTaskCardList, setTaskList]
+    [setGlobalTaskCardList, setGlobalTaskList]
   );
   return { getUserTask, loading };
 };

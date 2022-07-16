@@ -1,23 +1,24 @@
-import React, {
+import {
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
   useState,
 } from "react";
+
 import { Task } from "../types/task";
 import { TaskList } from "../types/taskList";
 
 export type TaskListContextType = {
-  taskCardList: Array<TaskList>;
-  setTaskCardList: Dispatch<SetStateAction<Array<TaskList>>>;
+  globalTaskCardList: Array<TaskList>;
+  setGlobalTaskCardList: Dispatch<SetStateAction<Array<TaskList>>>;
 };
 export const TaskListContext = createContext<TaskListContextType>(
   {} as TaskListContextType
 );
 export type TaskContextType = {
-  taskList: Array<Task>;
-  setTaskList: Dispatch<SetStateAction<Array<Task>>>;
+  globalTaskList: Array<Task>;
+  setGlobalTaskList: Dispatch<SetStateAction<Array<Task>>>;
 };
 export const TaskContext = createContext<TaskContextType>(
   {} as TaskContextType
@@ -26,14 +27,19 @@ export const TaskContext = createContext<TaskContextType>(
 type Props = {
   children: ReactNode;
 };
+
 export const TaskListProvider = (props: Props) => {
   const { children } = props;
-  const [taskCardList, setTaskCardList] = useState<Array<TaskList>>([]);
-  const [taskList, setTaskList] = useState<Array<Task>>([]);
+  const [globalTaskCardList, setGlobalTaskCardList] = useState<Array<TaskList>>(
+    []
+  );
+  const [globalTaskList, setGlobalTaskList] = useState<Array<Task>>([]);
 
   return (
-    <TaskListContext.Provider value={{ taskCardList, setTaskCardList }}>
-      <TaskContext.Provider value={{ taskList, setTaskList }}>
+    <TaskListContext.Provider
+      value={{ globalTaskCardList, setGlobalTaskCardList }}
+    >
+      <TaskContext.Provider value={{ globalTaskList, setGlobalTaskList }}>
         {children}
       </TaskContext.Provider>
     </TaskListContext.Provider>

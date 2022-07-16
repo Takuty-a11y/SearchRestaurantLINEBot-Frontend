@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { Box, Heading, Input } from "@chakra-ui/react";
+
 import { TaskList } from "../../../types/taskList";
 import { useTaskList } from "../../../hooks/useTaskList";
 
@@ -18,11 +19,11 @@ export const TaskCardTitleInput: FC<Props> = (props) => {
   const { taskCard } = props;
   const [isClick, setisClick] = useState(false);
   const [cardTitle, setCardTitle] = useState(taskCard.title);
-  const { taskCardList, setTaskCardList } = useTaskList();
+  const { setGlobalTaskCardList } = useTaskList();
 
   const onClickTitle = useCallback(() => {
     setisClick(true);
-  }, []);
+  }, [setisClick]);
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setCardTitle(e.target.value);
   };
@@ -34,7 +35,7 @@ export const TaskCardTitleInput: FC<Props> = (props) => {
   };
   const onSubmitTitle = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTaskCardList((prevState) =>
+    setGlobalTaskCardList((prevState) =>
       prevState.map((obj) =>
         obj.id === taskCard.id
           ? {

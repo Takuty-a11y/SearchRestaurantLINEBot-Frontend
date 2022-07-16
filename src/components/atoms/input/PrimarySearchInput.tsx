@@ -1,6 +1,6 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 
 type Props = {
   placeholder: string;

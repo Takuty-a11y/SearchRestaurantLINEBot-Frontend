@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { MdAdd } from "react-icons/md";
 import { Box, Button, Icon } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
@@ -6,11 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import { useTaskList } from "../../../hooks/useTaskList";
 
 export const TaskCardAddButton: FC = () => {
-  const { taskCardList, setTaskCardList } = useTaskList();
-  const onClickAddCard = () => {
+  const { globalTaskCardList, setGlobalTaskCardList } = useTaskList();
+  const onClickAddCard = useCallback(() => {
     const CardId = uuidv4();
-    setTaskCardList([
-      ...taskCardList,
+    setGlobalTaskCardList([
+      ...globalTaskCardList,
       {
         id: CardId,
         title: "Today",
@@ -18,7 +18,7 @@ export const TaskCardAddButton: FC = () => {
         draggableId: `card-${CardId}`,
       },
     ]);
-  };
+  }, [globalTaskCardList, setGlobalTaskCardList]);
   return (
     <Box mx={3} my={3}>
       <Button

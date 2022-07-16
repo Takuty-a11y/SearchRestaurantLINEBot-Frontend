@@ -10,7 +10,7 @@ import { useLoginUser } from "../../hooks/useLoginUser";
 import { useSearchTask } from "../../hooks/useSearchTask";
 
 export const Home: FC = memo(() => {
-  const { taskCardList, setTaskCardList } = useTaskList();
+  const { globalTaskCardList, setGlobalTaskCardList } = useTaskList();
   const { getUserTask, loading } = useUserTask();
   const { loginUser } = useLoginUser();
   const { searchTaskText } = useSearchTask();
@@ -28,12 +28,12 @@ export const Home: FC = memo(() => {
       }
       const startIndex = res.source.index;
       const endIndex = res.destination?.index;
-      const newList = [...taskCardList];
+      const newList = [...globalTaskCardList];
       const item = newList.splice(startIndex, 1);
       newList.splice(endIndex, 0, item[0]);
-      setTaskCardList(newList);
+      setGlobalTaskCardList(newList);
     },
-    [taskCardList, setTaskCardList]
+    [globalTaskCardList, setGlobalTaskCardList]
   );
   return (
     <>
@@ -51,7 +51,7 @@ export const Home: FC = memo(() => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                {taskCardList
+                {globalTaskCardList
                   .filter((card) =>
                     card.title.toUpperCase().match(searchTaskText.toUpperCase())
                   )
