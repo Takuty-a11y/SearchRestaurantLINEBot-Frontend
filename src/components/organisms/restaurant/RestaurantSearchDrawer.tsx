@@ -75,7 +75,7 @@ export const RestaurantSearchDrawer: FC<Props> = memo((props) => {
     <>
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent borderRadius="lg">
+        <DrawerContent borderRadius="sm">
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">詳細検索</DrawerHeader>
 

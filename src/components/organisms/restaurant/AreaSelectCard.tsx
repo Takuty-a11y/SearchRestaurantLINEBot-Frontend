@@ -1,4 +1,11 @@
-import { ChangeEvent, Dispatch, FC, memo, SetStateAction, useEffect } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  memo,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { Select, Stack } from "@chakra-ui/react";
 import { useAllArea } from "../../../hooks/useAllArea";
 
@@ -11,19 +18,19 @@ type Props = {
 
 export const AreaSelectCard: FC<Props> = memo((props) => {
   const { largeSelect, middleSelect, setLargeSelect, setMiddleSelect } = props;
-  const {getLargeArea, getMiddleArea, largeAreas, middleAreas} = useAllArea()
+  const { getLargeArea, getMiddleArea, largeAreas, middleAreas } = useAllArea();
 
   const onChangeLarge = (e: ChangeEvent<HTMLSelectElement>) => {
     setLargeSelect(e.target.value ?? "");
-    getMiddleArea(e.target.value)
+    getMiddleArea(e.target.value);
   };
   const onChangeMiddle = (e: ChangeEvent<HTMLSelectElement>) => {
     setMiddleSelect(e.target.value ?? "");
   };
 
   useEffect(() => {
-    getLargeArea()
-  },[getLargeArea])
+    getLargeArea();
+  }, [getLargeArea]);
 
   return (
     <Stack>
@@ -53,13 +60,11 @@ export const AreaSelectCard: FC<Props> = memo((props) => {
         value={middleSelect}
         onChange={onChangeMiddle}
       >
-        {middleAreas
-          //.filter((option) => option.large_area.code === largeSelect)
-          .map((option) => (
-            <option key={option.code} value={option.code}>
-              {option.name}
-            </option>
-          ))}
+        {middleAreas.map((option) => (
+          <option key={option.code} value={option.code}>
+            {option.name}
+          </option>
+        ))}
       </Select>
     </Stack>
   );

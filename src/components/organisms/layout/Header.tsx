@@ -42,7 +42,7 @@ export const Header: FC<Props> = memo((props) => {
               onClick={onClickHome}
             >
               <Heading as="h1" fontSize="1.8rem" color="gray.800">
-                SRBot
+                飲食店サーチBot
               </Heading>
             </Flex>
           </Flex>
