@@ -4,8 +4,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        backgroundColor: "teal.200",
-        color: "gray.800",
+        fontFamily: "Helvetica Neue, Helvetica, Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, Yu Gothic, Meiryo, sans-serif",
+        color: "gray.600",
       },
     },
   },
